@@ -1,10 +1,13 @@
 import React, { Component } from "react";
 import * as tf from "@tensorflow/tfjs";
 import gaussian from "gaussian";
-import "./App.css";
+
 import ImageCanvas from "../components/ImageCanvas";
 import XYPlot from "../components/XYPlot";
 
+import "./App.css";
+
+import encodedData from "../encoded.json";
 const MODEL_PATH = "models/generatorjs/model.json";
 
 class App extends Component {
@@ -40,46 +43,29 @@ class App extends Component {
   }
 
   render() {
-    return (
+    return this.state.model === null ? (
+      <div>Loading model</div>
+    ) : (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">VAE Digit Visualization</h1>
-        </header>
-        <p className="App-intro" />
-        <div>
-          <p>Mu: {this.state.mu}</p>
-          <p>Sigma: {this.state.sigma}</p>
+        <p>Mu: {Math.round(this.norm.cdf(this.state.mu) * 1000) / 1000}</p>
+        <p>
+          Sigma: {Math.round(this.norm.cdf(this.state.sigma) * 1000) / 1000}
+        </p>
+        <ImageCanvas width={300} height={300} imageData={this.state.digitImg} />
 
-          <ImageCanvas
-            width={300}
-            height={300}
-            imageData={this.state.digitImg}
-          />
-
-          <XYPlot
-            data={[
-              { x: -4, y: -4, label: 0 },
-              { x: -1, y: -4, label: 1 },
-              { x: -2, y: -2, label: 2 },
-              { x: -1, y: -3, label: 3 },
-              { x: 0, y: 0, label: 4 },
-              { x: 1, y: 0, label: 5 },
-              { x: 4, y: 2, label: 6 },
-              { x: 4, y: 4, label: 7 },
-              { x: -2, y: 4, label: 8 },
-              { x: -3, y: 4, label: 9 },
-              { x: 4, y: -3, label: 7 }
-            ]}
-            width={300 - 10 - 10}
-            height={300 - 20 - 10}
-            margin={{ top: 20, bottom: 10, left: 10, right: 10 }}
-            onHover={({ x, y }) => {
-              this.setState({ sigma: x });
-              this.setState({ mu: y });
-              this.getImage().then(digitImg => this.setState({ digitImg }));
-            }}
-          />
-        </div>
+        <XYPlot
+          data={encodedData}
+          width={300 - 10 - 10}
+          height={300 - 20 - 10}
+          xAccessor={d => d[0]}
+          yAccessor={d => d[1]}
+          colorAccessor={d => d[2]}
+          margin={{ top: 20, bottom: 10, left: 10, right: 10 }}
+          onHover={({ x, y }) => {
+            this.setState({ sigma: y, mu: x });
+            this.getImage().then(digitImg => this.setState({ digitImg }));
+          }}
+        />
       </div>
     );
   }
