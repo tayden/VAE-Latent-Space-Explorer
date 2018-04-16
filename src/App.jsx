@@ -1,52 +1,48 @@
 import React, { Component } from "react";
-import "./App.css";
 import * as tf from "@tensorflow/tfjs";
 import gaussian from "gaussian";
+import "./App.css";
 import ImageCanvas from "./ImageCanvas";
 
+const MODEL_PATH = "models/generatorjs/model.json";
+
 class App extends Component {
-  async fetchModel() {
-    return tf.loadModel("models/generatorjs/model.json");
-  }
-
-  async getImage() {
-    const { model, mu, sigma } = this.state;
-    const z_sample = tf.tensor([[mu, sigma]]);
-    const pred = model
-      .predict(z_sample)
-      .mul(tf.scalar(255.0))
-      .reshape([28, 28]);
-    return pred;
-  }
-
   constructor(props) {
     super(props);
     this.state = {
       model: null,
-      digit_img: tf.zeros([28, 28]),
+      digitImg: tf.zeros([28, 28]),
       mu: 0.5,
       sigma: 0.5
     };
     this.norm = gaussian(1, 1);
 
     this.getImage = this.getImage.bind(this);
-    this.fetchModel = this.fetchModel.bind(this);
-
     this.handleMuChange = event => {
       this.setState({ mu: event.target.value / 100 });
-      this.getImage().then(digit_img => this.setState({ digit_img }));
+      this.getImage().then(digitImg => this.setState({ digitImg }));
     };
     this.handleSigmaChange = event => {
       this.setState({ sigma: event.target.value / 100 });
-      this.getImage().then(digit_img => this.setState({ digit_img }));
+      this.getImage().then(digitImg => this.setState({ digitImg }));
     };
   }
 
   componentDidMount() {
-    this.fetchModel()
+    tf
+      .loadModel(MODEL_PATH)
       .then(model => this.setState({ model }))
       .then(() => this.getImage())
-      .then(digit_img => this.setState({ digit_img }));
+      .then(digitImg => this.setState({ digitImg }));
+  }
+
+  async getImage() {
+    const { model, mu, sigma } = this.state;
+    const zSample = tf.tensor([[mu, sigma]]);
+    return model
+      .predict(zSample)
+      .mul(tf.scalar(255.0))
+      .reshape([28, 28]);
   }
 
   render() {
@@ -58,7 +54,7 @@ class App extends Component {
         <p className="App-intro" />
         <div>
           <form>
-            <label>
+            <label htmlFor="mu">
               Mu: {this.state.mu}
               <input
                 type="range"
@@ -70,7 +66,7 @@ class App extends Component {
               />
             </label>
             <br />
-            <label>
+            <label htmlFor="sigma">
               Sigma: {this.state.sigma}
               <input
                 type="range"
@@ -86,7 +82,7 @@ class App extends Component {
           <ImageCanvas
             width={300}
             height={300}
-            imageData={this.state.digit_img}
+            imageData={this.state.digitImg}
           />
         </div>
       </div>

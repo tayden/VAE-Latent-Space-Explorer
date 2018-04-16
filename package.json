@@ -5,11 +5,9 @@
   "dependencies": {
     "@tensorflow/tfjs": "^0.9.1",
     "gaussian": "^1.1.0",
-    "konva": "^2.0.2",
-    "prettier": "^1.12.0",
+    "prop-types": "^15.6.1",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
-    "react-konva": "^1.7.2",
     "react-scripts": "1.1.4"
   },
   "scripts": {
@@ -17,5 +15,14 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "prettier": "^1.12.0"
   }
 }
