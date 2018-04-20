@@ -35,7 +35,7 @@ const Explanation = () => (
     <div className="textbox">
       <div className="header">
         <h2>
-          What is variational autoencoder?
+          What is a variational autoencoder?
         </h2>
       </div>
       <div className="content">
