@@ -4,10 +4,13 @@ import gaussian from "gaussian";
 
 import ImageCanvas from "../components/ImageCanvas";
 import XYPlot from "../components/XYPlot";
+import Explanation from "../components/Explanation";
+import { rounder } from "../utils";
 
 import "./App.css";
 
 import encodedData from "../encoded.json";
+
 const MODEL_PATH = "models/generatorjs/model.json";
 
 class App extends Component {
@@ -15,7 +18,7 @@ class App extends Component {
     super(props);
     this.getImage = this.getImage.bind(this);
 
-    this.norm = gaussian(1, 1);
+    this.norm = gaussian(0, 1);
 
     this.state = {
       model: null,
@@ -44,28 +47,40 @@ class App extends Component {
 
   render() {
     return this.state.model === null ? (
-      <div>Loading model</div>
+      <div>Loading, please wait</div>
     ) : (
       <div className="App">
-        <p>Mu: {Math.round(this.norm.cdf(this.state.mu) * 1000) / 1000}</p>
-        <p>
-          Sigma: {Math.round(this.norm.cdf(this.state.sigma) * 1000) / 1000}
-        </p>
-        <ImageCanvas width={300} height={300} imageData={this.state.digitImg} />
+        <h1>VAE Latent Space Explorer</h1>
+        <div className="ImageDisplay">
+          <ImageCanvas
+            width={500}
+            height={500}
+            imageData={this.state.digitImg}
+          />
+        </div>
 
-        <XYPlot
-          data={encodedData}
-          width={300 - 10 - 10}
-          height={300 - 20 - 10}
-          xAccessor={d => d[0]}
-          yAccessor={d => d[1]}
-          colorAccessor={d => d[2]}
-          margin={{ top: 20, bottom: 10, left: 10, right: 10 }}
-          onHover={({ x, y }) => {
-            this.setState({ sigma: y, mu: x });
-            this.getImage().then(digitImg => this.setState({ digitImg }));
-          }}
-        />
+        <div className="ChartDisplay">
+          <XYPlot
+            data={encodedData}
+            width={500 - 10 - 10}
+            height={500 - 20 - 10}
+            xAccessor={d => d[0]}
+            yAccessor={d => d[1]}
+            colorAccessor={d => d[2]}
+            margin={{ top: 20, bottom: 10, left: 10, right: 10 }}
+            onHover={({ x, y }) => {
+              this.setState({ sigma: y, mu: x });
+              this.getImage().then(digitImg => this.setState({ digitImg }));
+            }}
+          />
+        </div>
+        <p>Mu: {rounder(this.norm.cdf(this.state.mu), 3)}</p>
+        <p>Sigma: {rounder(this.norm.cdf(this.state.sigma), 3)}</p>
+        <div className="Explanation">
+          <Explanation />
+        </div>
+
+        <h5>Created by Taylor Denouden (April 2018)</h5>
       </div>
     );
   }

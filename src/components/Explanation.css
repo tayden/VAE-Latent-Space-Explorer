@@ -1,0 +1,23 @@
+.textbox {
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: white;
+  margin-top: 20px;
+}
+
+.textbox>.header {
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #d9d9d9;
+}
+
+.textbox>.header h2{
+  margin-top: 0;
+}
+
+.textbox .content {
+  padding-left: 20px;
+  padding-right: 20px;
+}

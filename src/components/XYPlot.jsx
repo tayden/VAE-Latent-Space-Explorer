@@ -33,7 +33,8 @@ class XYPlot extends Component {
       .attr("width", width + margin.left + margin.right)
       .style("stroke", "black")
       .style("fill", "none")
-      .style("stroke-width", 1);
+      .style("stroke-width", 1)
+      .style("fill", "white");
 
     // Add margins
     svg = svg

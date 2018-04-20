@@ -1,10 +1,11 @@
-.App {
-  text-align: center;
+body {
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color: #f9f9f9;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.App {
+  text-align: center;
 }
 
 .App-header {
@@ -20,6 +21,16 @@
 
 .App-intro {
   font-size: large;
+}
+
+.ImageDisplay {
+  display: inline-block;
+  /* float: left; */
+}
+.ChartDisplay {
+  display: inline-block;
+
+  /* float: right; */
 }
 
 @keyframes App-logo-spin {
