@@ -21,7 +21,7 @@ const Explanation = () => (
           the above scatterplot. Moving your mouse around this plot samples 2
           latent space vectors from the encoded unit Gaussian and passes these
           values to the decoder network. The decoder network produces a new
-          generated handwritten digitwhich is displayed via an html Canvas.
+          generated handwritten digit which is displayed via an html Canvas.
         </p>
         <p>
           All code runs in the browser using the recently released
@@ -40,7 +40,7 @@ const Explanation = () => (
       </div>
       <div className="content">
         <p>
-          For an excellent explanation, check out{" "}
+          For an great explanation, check out{" "}
           <a href="http://kvfrans.com/variational-autoencoders-explained/">
             this excellent blog post
           </a>{" "}
