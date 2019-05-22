@@ -78,3 +78,6 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# ignore scripts when detecting project language
+scripts/* linguist-vendored
