@@ -1,0 +1,2 @@
+# ignore scripts when detecting project language
+scripts/* linguist-vendored
