@@ -1,10 +1,15 @@
 # VAE Latent Space Explorer
 
-This application is a toy visualization that allows you to generate new images of 28x28 numerical digits using a variational autoencoder.
+<p align="center">
+  <img alt="demo" src="https://media.giphy.com/media/V8MF8wIJDGkbTQv3E1/giphy.gif" width="75%">
+</p>
 
-## [You can view the visualization here](https://tayden.github.io/VAE-Latent-Space-Explorer/)
+## [Try the demo!](https://tayden.github.io/VAE-Latent-Space-Explorer/)
 
-## Implementation details
+### About
+This application is a toy visualization that allows you to generate new images of 28x28 numerical digits using a variational autoencoder in the browser.
+
+### Implementation details
 
 The variational autoencoder was implemented using Keras and the relevant code is located in the scripts directory in a Jupyter notebook.
 Once the model is trained, the architecture and weights are saved in a format that can be ingested by tensorflow-js. Tensorflow-js handles
