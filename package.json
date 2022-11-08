@@ -15,9 +15,9 @@
     "@tensorflow/tfjs": "^0.9.1",
     "d3": "^5.1.0",
     "gaussian": "^1.1.0",
-    "prop-types": "^15.6.1",
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
+    "prop-types": "^15.8.1",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
     "react-scripts": "5.0.1"
   },
   "devDependencies": {
