@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@tensorflow/tfjs": "^0.9.1",
-    "d3": "^5.1.0",
+    "d3": "^7.6.1",
     "gaussian": "^1.1.0",
     "prop-types": "^15.6.1",
     "react": "^16.3.1",
